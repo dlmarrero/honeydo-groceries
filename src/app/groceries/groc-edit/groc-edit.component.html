@@ -1,0 +1,129 @@
+<div *ngIf="products$ | async as products; else loading" style="text-align:center;padding:10px">
+  <h3 style="padding-bottom:10px">Grocery List</h3>
+  <div style="position:absolute;top:65px;right:10px">
+    <span [hidden]="shopMode">Shop</span>
+    <span [hidden]="!shopMode">Edit</span>
+    <br>
+    <label class="switch">
+      <input type="checkbox" (change)="toggleMode()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+
+  <div id="addProduct" [hidden]="shopMode && !showEdit">
+    <hr>
+    <form [formGroup]="productForm" novalidate>
+      <div style="text-align: center; display: flex; flex-direction: row; flex-wrap:wrap;justify-content:center">
+        <div class="form-group" style="width:100%">
+          <label class="form-label">
+            Product Name:
+          </label>
+          <input class="form-control" formControlName="name" #name>
+        </div>
+        <div class="form-group" style="width:100%">
+          <label class="form-label">
+            Aisle:
+          </label>
+          <input class="form-control" formControlName="aisle">
+        </div>
+        <div class="form-group" style="width:100%">
+          <label class="form-label">
+            Note:
+          </label>
+          <input class="form-control" formControlName="note">
+        </div>
+      </div>
+      <div *ngIf="!showEdit">
+        <button style="width:100%" class="btn btn-primary" [disabled]="!productForm.valid" (click)="addProduct(); name.focus()">Add To Products</button>
+      </div>
+      <div [hidden]="!showEdit">
+        <button style="width:100%" class="btn btn-primary" (click)="updateProduct()">Save Changes</button>
+      </div>
+      <div [hidden]="!showEdit" style="padding-top:10px">
+        <button style="width:100%" class="btn btn-danger" (click)="deleteProduct()">Delete Product</button>
+      </div>
+    </form>
+    <hr>
+  </div>
+
+  <div id="productList" [hidden]="shopMode">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">List</th>
+          <th scope="col">Name</th>
+          <th scope="col">Aisle</th>
+          <th scope="col">Note</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <th scope="row">
+            <input type="checkbox" style="transform: scale(1.4)" [ngModel]="p.onList" (change)="toggleList(p)">
+          </th>
+          <td>{{p.name}}</td>
+          <td>{{p.aisle}}</td>
+          <td>{{p.note}}</td>
+          <td>
+            <a style="color:rgb(120, 214, 243); cursor:pointer" (click)="editProduct(p)">
+              <i class="ion ion-edit" style="padding:15px;font-size:22px"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+  </div>
+  <div *ngFor="let product of products | listFilter">
+    <!-- PURCHASED ITEMS -->
+    <!-- <div class="card text-white bg-info mb-3" style="width:100%" [hidden]="!product.complete || shopMode">
+      <div style="display:flex; justify-content:center">
+        <div>
+          <a style="color:rgb(235, 235, 235); cursor:pointer" (click)="editProduct(product)">
+            <i class="ion ion-edit" style="padding:15px;font-size:22px"></i>
+          </a>
+        </div>
+        <div class="card-body">
+          <div style="position:relative;top:-10px">
+            Aisle: {{product.aisle || 'Unk'}}
+          </div>
+          <h4 class="card-title">{{product.name}}</h4>
+          <p class="card-text" [hidden]="!product.note">{{product.note}}</p>
+        </div>
+        <div>
+          <a [style.color]="product.complete ? 'rgb(108, 236, 91)' : 'rgb(235, 235, 235)'" style="cursor:pointer" (click)="toggleList(product)">
+            <i class="ion ion-checkmark-round" style="padding:15px;font-size:22px"></i>
+          </a>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="card text-white bg-info mb-3" style="width:100%" [hidden]="!shopMode" [attr.id]="product.id">
+      <div style="display:flex; justify-content:center">
+        <div>
+          <a style="color:rgb(235, 235, 235); cursor:pointer" (click)="editProduct(product)">
+            <i class="ion ion-edit" style="padding:15px;font-size:22px"></i>
+          </a>
+        </div>
+        <div class="card-body">
+          <div style="position:relative;top:-10px">
+            Aisle: {{product.aisle || 'Unknown'}}
+          </div>
+          <h4 class="card-title">{{product.name}}</h4>
+          <p class="card-text" [hidden]="!product.note">{{product.note}}</p>
+        </div>
+        <div>
+          <a style="cursor:pointer;color:rgb(108, 236, 91)" (click)="toggleList(product)">
+            <i class="ion ion-checkmark-round" style="padding:15px;font-size:22px"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #loading>Loading...</ng-template>

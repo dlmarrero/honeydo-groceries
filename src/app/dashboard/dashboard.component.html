@@ -1,0 +1,80 @@
+<div class="landing-container">
+  <div class="landing-link card text-white bg-primary mb-3" style="text-align:center">
+    <a class="btn btn-primary btn-lg" style="height:100%" href="#" role="button" routerLink="../groceries">
+      <div class="card-body">
+        <i style="font-size:96px" class="icon ion-ios-cart-outline"></i>
+        <h4 class="card-title">Groceries</h4>
+      </div>
+    </a>
+  </div>
+
+  <div class="landing-link card text-white bg-primary mb-3" style="text-align:center">
+    <a class="btn btn-primary btn-lg" href="#" role="button" onclick="hd.nav('views/todo.html')">
+      <div class="card-body">
+        <i style="font-size:96px" class="icon ion-ios-list-outline"></i>
+        <h4 class="card-title">To-Do Lists</h4>
+        <div class="progress">
+          <div class="progress-bar bg-warning" role="progressbar" style="width: 57%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="landing-link card text-white bg-primary mb-3" style="text-align:center">
+    <a class="btn btn-primary btn-lg" href="#" role="button" onclick="hd.nav('views/chores.html')">
+      <div class="card-body">
+        <i style="font-size:96px" class="icon ion-ios-home-outline"></i>
+        <h4 class="card-title">Chores</h4>
+        <div class="progress">
+          <div class="progress-bar bg-warning" role="progressbar" style="width: 94%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div style="padding-top:20px; width:100%; text-align:center">
+    <h3>Today's Lists:</h3>
+    <div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col" width="10%">Type</th>
+            <th scope="col" style="text-align:center">Title</th>
+            <th scope="col" width="10%">Completed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Groceries</th>
+            <td style="text-align:center">
+              <a href="#">January 2nd List</a>
+            </td>
+            <td style="text-align:center">10 of 23</td>
+          </tr>
+          <tr>
+            <th scope="row">To-Do</th>
+            <td style="text-align:center">
+              <a href="#">Honda To-Dos</a>
+
+            </td>
+            <td style="text-align:center">0 of 3</td>
+          </tr>
+          <tr>
+            <th scope="row">Chores</th>
+            <td style="text-align:center">
+              <a href="#">House Repairs</a>
+            </td>
+            <td style="text-align:center">1 of 6</td>
+          </tr>
+          <tr class="table-primary">
+            <th scope="row">To-Do</th>
+            <td style="text-align:center">
+              Subaru To-Dos
+            </td>
+            <td style="text-align:center">5 of 5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

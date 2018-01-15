@@ -1,0 +1,11 @@
+.landing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.landing-link {
+    min-width: 414px;
+    margin: 10px;
+    flex-grow: 1;
+}
